@@ -1,0 +1,53 @@
+
+
+# 4️⃣ Shell Programming
+
+### File: `shell_program.sh`
+
+```bash
+#!/bin/bash
+
+while true
+do
+    echo "-----------------------------"
+    echo "       SHELL PROGRAM"
+    echo "-----------------------------"
+    echo "1. Display Date"
+    echo "2. Display Current Directory"
+    echo "3. Display Logged-in User"
+    echo "4. List Files"
+    echo "5. Exit"
+
+    read -p "Enter your choice: " choice
+
+    case $choice in
+
+        1)
+            date
+            ;;
+
+        2)
+            pwd
+            ;;
+
+        3)
+            whoami
+            ;;
+
+        4)
+            ls
+            ;;
+
+        5)
+            echo "Exiting..."
+            exit 0
+            ;;
+
+        *)
+            echo "Invalid choice"
+            ;;
+
+    esac
+
+    echo
+done
