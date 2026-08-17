@@ -1,0 +1,104 @@
+
+---
+
+# 3️⃣ Simulate Unix Commands
+
+### File: `simulate_commands.c`
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void simulate_ls()
+{
+    printf("\nSimulating ls command:\n");
+    system("ls");
+}
+
+void simulate_cat()
+{
+    char filename[100];
+
+    printf("Enter filename: ");
+    scanf("%s", filename);
+
+    printf("\nFile contents:\n");
+    system("cat filename.txt");
+}
+
+void simulate_cp()
+{
+    char source[100], destination[100];
+
+    printf("Enter source file: ");
+    scanf("%s", source);
+
+    printf("Enter destination file: ");
+    scanf("%s", destination);
+
+    char command[250];
+
+    sprintf(command, "cp %s %s", source, destination);
+    system(command);
+
+    printf("File copied successfully.\n");
+}
+
+void simulate_wc()
+{
+    char filename[100];
+
+    printf("Enter filename: ");
+    scanf("%s", filename);
+
+    char command[200];
+
+    sprintf(command, "wc %s", filename);
+    system(command);
+}
+
+int main()
+{
+    int choice;
+
+    while (1)
+    {
+        printf("\n--- UNIX COMMAND SIMULATION ---\n");
+        printf("1. ls\n");
+        printf("2. cat\n");
+        printf("3. cp\n");
+        printf("4. wc\n");
+        printf("5. Exit\n");
+
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                simulate_ls();
+                break;
+
+            case 2:
+                simulate_cat();
+                break;
+
+            case 3:
+                simulate_cp();
+                break;
+
+            case 4:
+                simulate_wc();
+                break;
+
+            case 5:
+                exit(0);
+
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+
+    return 0;
+}
