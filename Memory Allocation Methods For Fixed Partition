@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+int main()
+{
+    int partitions, processes;
+
+    printf("Enter number of memory partitions: ");
+    scanf("%d", &partitions);
+
+    int partition_size[partitions];
+
+    printf("Enter partition sizes:\n");
+
+    for (int i = 0; i < partitions; i++)
+    {
+        printf("Partition %d: ", i + 1);
+        scanf("%d", &partition_size[i]);
+    }
+
+    printf("\nEnter number of processes: ");
+    scanf("%d", &processes);
+
+    int process_size[processes];
+
+    printf("Enter process sizes:\n");
+
+    for (int i = 0; i < processes; i++)
+    {
+        printf("Process %d: ", i + 1);
+        scanf("%d", &process_size[i]);
+    }
+
+    int allocated[partitions];
+
+    for (int i = 0; i < partitions; i++)
+        allocated[i] = 0;
+
+    printf("\nMemory Allocation:\n");
+
+    for (int i = 0; i < processes; i++)
+    {
+        int allocated_flag = 0;
+
+        for (int j = 0; j < partitions; j++)
+        {
+            if (!allocated[j] && process_size[i] <= partition_size[j])
+            {
+                allocated[j] = 1;
+
+                printf("Process %d (%d KB) -> Partition %d (%d KB)\n",
+                       i + 1,
+                       process_size[i],
+                       j + 1,
+                       partition_size[j]);
+
+                allocated_flag = 1;
+                break;
+            }
+        }
+
+        if (!allocated_flag)
+        {
+            printf("Process %d (%d KB) -> Not Allocated\n",
+                   i + 1,
+                   process_size[i]);
+        }
+    }
+
+    return 0;
+}
