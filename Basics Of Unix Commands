@@ -1,0 +1,76 @@
+BASIC UNIX COMMANDS
+
+1. pwd
+   Displays the present working directory.
+   Example:
+   pwd
+
+2. ls
+   Lists files and directories.
+   Example:
+   ls
+
+3. mkdir
+   Creates a new directory.
+   Example:
+   mkdir test
+
+4. cd
+   Changes the current directory.
+   Example:
+   cd test
+
+5. touch
+   Creates an empty file.
+   Example:
+   touch file.txt
+
+6. cat
+   Displays the contents of a file.
+   Example:
+   cat file.txt
+
+7. cp
+   Copies files or directories.
+   Example:
+   cp file.txt copy.txt
+
+8. mv
+   Moves or renames a file.
+   Example:
+   mv file.txt newfile.txt
+
+9. rm
+   Removes a file.
+   Example:
+   rm file.txt
+
+10. rmdir
+    Removes an empty directory.
+    Example:
+    rmdir test
+
+11. clear
+    Clears the terminal screen.
+    Example:
+    clear
+
+12. whoami
+    Displays the current username.
+    Example:
+    whoami
+
+13. date
+    Displays the current date and time.
+    Example:
+    date
+
+14. wc
+    Counts lines, words and characters.
+    Example:
+    wc file.txt
+
+15. man
+    Displays the manual page of a command.
+    Example:
+    man ls
