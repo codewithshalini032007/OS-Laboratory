@@ -1,0 +1,107 @@
+#include <stdio.h>
+
+int search(int frames[], int n, int page)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (frames[i] == page)
+            return 1;
+    }
+
+    return 0;
+}
+
+void fifo(int pages[], int n, int frames_count)
+{
+    int frames[frames_count];
+    int index = 0;
+    int faults = 0;
+
+    for (int i = 0; i < frames_count; i++)
+        frames[i] = -1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!search(frames, frames_count, pages[i]))
+        {
+            frames[index] = pages[i];
+            index = (index + 1) % frames_count;
+            faults++;
+        }
+    }
+
+    printf("FIFO Page Faults: %d\n", faults);
+}
+
+void lru(int pages[], int n, int frames_count)
+{
+    int frames[frames_count];
+    int recent[frames_count];
+    int faults = 0;
+
+    for (int i = 0; i < frames_count; i++)
+    {
+        frames[i] = -1;
+        recent[i] = 0;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        int found = -1;
+
+        for (int j = 0; j < frames_count; j++)
+        {
+            if (frames[j] == pages[i])
+            {
+                found = j;
+                break;
+            }
+        }
+
+        if (found != -1)
+        {
+            recent[found] = i;
+        }
+        else
+        {
+            int pos = 0;
+
+            for (int j = 1; j < frames_count; j++)
+            {
+                if (recent[j] < recent[pos])
+                    pos = j;
+            }
+
+            frames[pos] = pages[i];
+            recent[pos] = i;
+            faults++;
+        }
+    }
+
+    printf("LRU Page Faults: %d\n", faults);
+}
+
+int main()
+{
+    int n, frames_count;
+
+    printf("Enter number of pages: ");
+    scanf("%d", &n);
+
+    int pages[n];
+
+    printf("Enter page reference string:\n");
+
+    for (int i = 0; i < n; i++)
+        scanf("%d", &pages[i]);
+
+    printf("Enter number of frames: ");
+    scanf("%d", &frames_count);
+
+    printf("\nPage Replacement Results\n");
+
+    fifo(pages, n, frames_count);
+    lru(pages, n, frames_count);
+
+    return 0;
+}
