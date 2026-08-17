@@ -1,0 +1,147 @@
+
+---
+
+# 5️⃣ CPU Scheduling
+
+### File: `cpu_scheduling.c`
+
+```c
+#include <stdio.h>
+
+void fcfs(int n, int bt[])
+{
+    int wt[n], tat[n];
+
+    wt[0] = 0;
+
+    for (int i = 1; i < n; i++)
+        wt[i] = wt[i - 1] + bt[i - 1];
+
+    for (int i = 0; i < n; i++)
+        tat[i] = wt[i] + bt[i];
+
+    printf("\nFCFS Scheduling\n");
+    printf("Process\tBT\tWT\tTAT\n");
+
+    for (int i = 0; i < n; i++)
+        printf("P%d\t%d\t%d\t%d\n", i + 1, bt[i], wt[i], tat[i]);
+}
+
+void sjf(int n, int bt[])
+{
+    int temp;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (bt[i] > bt[j])
+            {
+                temp = bt[i];
+                bt[i] = bt[j];
+                bt[j] = temp;
+            }
+        }
+    }
+
+    fcfs(n, bt);
+}
+
+void roundRobin(int n, int bt[], int quantum)
+{
+    int rem_bt[n];
+    int wt[n];
+    int tat[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        rem_bt[i] = bt[i];
+        wt[i] = 0;
+    }
+
+    int time = 0;
+
+    while (1)
+    {
+        int done = 1;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (rem_bt[i] > 0)
+            {
+                done = 0;
+
+                if (rem_bt[i] > quantum)
+                {
+                    time += quantum;
+                    rem_bt[i] -= quantum;
+                }
+                else
+                {
+                    time += rem_bt[i];
+                    wt[i] = time - bt[i];
+                    rem_bt[i] = 0;
+                }
+            }
+        }
+
+        if (done)
+            break;
+    }
+
+    for (int i = 0; i < n; i++)
+        tat[i] = bt[i] + wt[i];
+
+    printf("\nRound Robin Scheduling\n");
+    printf("Process\tBT\tWT\tTAT\n");
+
+    for (int i = 0; i < n; i++)
+        printf("P%d\t%d\t%d\t%d\n", i + 1, bt[i], wt[i], tat[i]);
+}
+
+int main()
+{
+    int n, choice, quantum;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    int bt[n];
+
+    printf("Enter burst times:\n");
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("P%d: ", i + 1);
+        scanf("%d", &bt[i]);
+    }
+
+    printf("\n1. FCFS");
+    printf("\n2. SJF");
+    printf("\n3. Round Robin");
+
+    printf("\nEnter choice: ");
+    scanf("%d", &choice);
+
+    if (choice == 1)
+    {
+        fcfs(n, bt);
+    }
+    else if (choice == 2)
+    {
+        sjf(n, bt);
+    }
+    else if (choice == 3)
+    {
+        printf("Enter time quantum: ");
+        scanf("%d", &quantum);
+
+        roundRobin(n, bt, quantum);
+    }
+    else
+    {
+        printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
