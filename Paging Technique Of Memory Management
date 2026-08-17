@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main()
+{
+    int pages, frames;
+
+    printf("Enter number of pages: ");
+    scanf("%d", &pages);
+
+    printf("Enter number of frames: ");
+    scanf("%d", &frames);
+
+    int page_table[pages];
+
+    printf("\nEnter frame number for each page:\n");
+
+    for (int i = 0; i < pages; i++)
+    {
+        printf("Page %d -> Frame: ", i);
+        scanf("%d", &page_table[i]);
+    }
+
+    int page, offset;
+
+    printf("\nEnter page number: ");
+    scanf("%d", &page);
+
+    printf("Enter offset: ");
+    scanf("%d", &offset);
+
+    if (page >= 0 && page < pages)
+    {
+        int frame = page_table[page];
+        int physical_address = frame * 100 + offset;
+
+        printf("\nPage Number: %d\n", page);
+        printf("Frame Number: %d\n", frame);
+        printf("Offset: %d\n", offset);
+        printf("Physical Address: %d\n", physical_address);
+    }
+    else
+    {
+        printf("Invalid page number.\n");
+    }
+
+    return 0;
+}
