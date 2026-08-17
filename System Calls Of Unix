@@ -1,0 +1,38 @@
+
+
+# 2️⃣ System Calls Of Unix
+
+### File: `system_calls.c`
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main()
+{
+    pid_t pid;
+
+    printf("Parent Process ID: %d\n", getpid());
+    printf("Parent's Parent Process ID: %d\n", getppid());
+
+    pid = fork();
+
+    if (pid < 0)
+    {
+        printf("Fork failed\n");
+    }
+    else if (pid == 0)
+    {
+        printf("\nChild Process\n");
+        printf("Child Process ID: %d\n", getpid());
+        printf("Parent Process ID: %d\n", getppid());
+    }
+    else
+    {
+        wait(NULL);
+        printf("\nParent process completed.\n");
+    }
+
+    return 0;
+}
