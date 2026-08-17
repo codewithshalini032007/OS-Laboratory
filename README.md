@@ -1,5 +1,5 @@
 # OS-Laboratory
-# Basics of Unix Commands
+# 1. Basics of Unix Commands
 
 ## Aim
 To study and execute basic Unix/Linux commands.
@@ -35,3 +35,23 @@ pwd
 ls
 mkdir test
 cd test
+
+# 2.System Calls of Unix
+
+## Aim
+To implement and study basic Unix system calls.
+
+## System Calls Used
+- fork()
+- getpid()
+- getppid()
+- wait()
+
+## Requirements
+- Linux / Ubuntu
+- GCC Compiler
+
+## Compilation
+
+```bash
+gcc system_calls.c -o system_calls
