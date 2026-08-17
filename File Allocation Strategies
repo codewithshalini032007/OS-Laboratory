@@ -1,0 +1,111 @@
+#include <stdio.h>
+
+void contiguous()
+{
+    int start, length;
+
+    printf("\n--- Contiguous Allocation ---\n");
+
+    printf("Enter starting block: ");
+    scanf("%d", &start);
+
+    printf("Enter number of blocks: ");
+    scanf("%d", &length);
+
+    printf("Allocated Blocks: ");
+
+    for (int i = 0; i < length; i++)
+        printf("%d ", start + i);
+
+    printf("\n");
+}
+
+void linked()
+{
+    int n;
+
+    printf("\n--- Linked Allocation ---\n");
+
+    printf("Enter number of blocks: ");
+    scanf("%d", &n);
+
+    int blocks[n];
+
+    printf("Enter block numbers:\n");
+
+    for (int i = 0; i < n; i++)
+        scanf("%d", &blocks[i]);
+
+    printf("Linked Blocks: ");
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d", blocks[i]);
+
+        if (i < n - 1)
+            printf(" -> ");
+    }
+
+    printf(" -> NULL\n");
+}
+
+void indexed()
+{
+    int index_block, n;
+
+    printf("\n--- Indexed Allocation ---\n");
+
+    printf("Enter index block: ");
+    scanf("%d", &index_block);
+
+    printf("Enter number of data blocks: ");
+    scanf("%d", &n);
+
+    int blocks[n];
+
+    printf("Enter data block numbers:\n");
+
+    for (int i = 0; i < n; i++)
+        scanf("%d", &blocks[i]);
+
+    printf("Index Block: %d\n", index_block);
+
+    printf("Data Blocks: ");
+
+    for (int i = 0; i < n; i++)
+        printf("%d ", blocks[i]);
+
+    printf("\n");
+}
+
+int main()
+{
+    int choice;
+
+    printf("FILE ALLOCATION STRATEGIES\n");
+    printf("1. Contiguous Allocation\n");
+    printf("2. Linked Allocation\n");
+    printf("3. Indexed Allocation\n");
+    printf("Enter choice: ");
+    scanf("%d", &choice);
+
+    switch (choice)
+    {
+        case 1:
+            contiguous();
+            break;
+
+        case 2:
+            linked();
+            break;
+
+        case 3:
+            indexed();
+            break;
+
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
